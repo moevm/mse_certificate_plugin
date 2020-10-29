@@ -15,3 +15,5 @@
 Для просмотра созданного сертификата на странице сертификата нажмите "Скачать сертификат"
 
 ## Презентации
+
+### [Итерация #2](https://github.com/moevm/mse_certificate_plugin/blob/upd_readme/docs/presentation_iter2.pdf)
