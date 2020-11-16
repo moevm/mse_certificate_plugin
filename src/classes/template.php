@@ -26,6 +26,7 @@ namespace mod_customcert;
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->libdir . '/tcpdf/tcpdf_barcodes_2d.php');
 /**
  * Class represents a customcert template.
  *
@@ -294,6 +295,18 @@ class template {
                 }
                 $pdf->AddPage($orientation, array($page->width, $page->height));
                 $pdf->SetMargins($page->leftmargin, 0, $page->rightmargin);
+				
+				//Auto QRCODE addition while generating pdf
+                $qrcodeurl = 'youtube.com';
+                $barcode = new \TCPDF2DBarcode($qrcodeurl, 'QRCODE');
+                $image = $barcode->getBarcodePngData(10, 10);
+
+                $location = make_request_directory() . '/target';
+                file_put_contents($location, $image);
+
+                $pdf->Image($location, 190, 10, 10, 10);
+
+				
                 // Get the elements for the page.
                 if ($elements = $DB->get_records('customcert_elements', array('pageid' => $page->id), 'sequence ASC')) {
                     // Loop through and display.
