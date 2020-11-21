@@ -297,14 +297,23 @@ class template {
                 $pdf->SetMargins($page->leftmargin, 0, $page->rightmargin);
 				
 				//Auto QRCODE addition while generating pdf
-                $qrcodeurl = 'youtube.com';
+                if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+					$qrcodeurl = "https://";
+                else
+					$qrcodeurl = "http://";
+                // Append the host(domain name, ip) to the URL.
+                $qrcodeurl.= $_SERVER['HTTP_HOST'];
+
+                $qrcodeurl.= "/course/view.php?id=";
+                $qrcodeurl.= strval($COURSE->id);
+
                 $barcode = new \TCPDF2DBarcode($qrcodeurl, 'QRCODE');
                 $image = $barcode->getBarcodePngData(10, 10);
 
                 $location = make_request_directory() . '/target';
                 file_put_contents($location, $image);
 
-                $pdf->Image($location, 190, 10, 10, 10);
+                $pdf->Image($location, $page->width - 20, 10, 10, 10);
 
 				
                 // Get the elements for the page.
