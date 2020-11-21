@@ -255,7 +255,7 @@ class template {
      * @return string|void Can return the PDF in string format if specified.
      */
     public function generate_pdf($preview = false, $userid = null, $return = false) {
-        global $CFG, $DB, $USER;
+        global $CFG, $DB, $USER, $COURSE;
 
         if (empty($userid)) {
             $user = $USER;
