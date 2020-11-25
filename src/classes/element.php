@@ -327,7 +327,7 @@ abstract class element {
             $element->id = $this->id;
             return $DB->update_record('customcert_elements', $element);
         } else { // Must be adding a new elements.
-	    $element->element = $data->element;
+            $element->element = $data->element;
             $element->pageid = $data->pageid;
             $element->timecreated = time();
             for($i=0;$i<$count;$i++){
