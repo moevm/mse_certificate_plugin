@@ -26,7 +26,6 @@ require_once('../../config.php');
 
 $tid = required_param('tid', PARAM_INT);
 $action = required_param('action', PARAM_ALPHA);
-
 $template = $DB->get_record('customcert_templates', array('id' => $tid), '*', MUST_EXIST);
 
 // Set the template object.
@@ -54,14 +53,16 @@ if ($action == 'edit') {
     // The id of the element must be supplied if we are currently editing one.
     $id = required_param('id', PARAM_INT);
     $element = $DB->get_record('customcert_elements', array('id' => $id), '*', MUST_EXIST);
-    $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('id' => $id, 'tid' => $tid, 'action' => $action));
+    $count = 1;
+    $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('id' => $id, 'tid' => $tid, 'action' => $action, 'count' => $count));
 } else { // Must be adding an element.
     // We need to supply what element we want added to what page.
     $pageid = required_param('pageid', PARAM_INT);
     $element = new stdClass();
     $element->element = required_param('element', PARAM_ALPHA);
+    $count = required_param('count', PARAM_INT);
     $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('tid' => $tid, 'element' => $element->element,
-        'pageid' => $pageid, 'action' => $action));
+        'pageid' => $pageid, 'action' => $action, 'count' => $count));
 }
 
 // Set up the page.
@@ -95,9 +96,9 @@ if ($data = $mform->get_data()) {
     $data->element = $element->element;
     // Get an instance of the element class.
     if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        $e->save_form_elements($data);
+        $e->save_form_elements($data, $count);
     }
-
+    //$url = new moodle_url('/mod/customcert/edit_element.php', $params);
     $url = new moodle_url('/mod/customcert/edit.php', array('tid' => $tid));
     redirect($url);
 }
