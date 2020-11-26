@@ -26,6 +26,7 @@ require_once('../../config.php');
 
 $tid = required_param('tid', PARAM_INT);
 $action = required_param('action', PARAM_ALPHA);
+
 $template = $DB->get_record('customcert_templates', array('id' => $tid), '*', MUST_EXIST);
 
 // Set the template object.
@@ -98,6 +99,7 @@ if ($data = $mform->get_data()) {
     if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
         $e->save_form_elements($data, $count);
     }
+    
     $url = new moodle_url('/mod/customcert/edit.php', array('tid' => $tid));
     redirect($url);
 }
