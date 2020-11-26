@@ -40,12 +40,12 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         $mform->addElement('textarea', 'text', get_string('text', 'customcertelement_text'));
         $mform->setType('text', PARAM_RAW);
         $mform->addHelpButton('text', 'text', 'customcertelement_text');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
     }
 
     /**

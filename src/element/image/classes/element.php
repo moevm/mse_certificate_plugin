@@ -62,9 +62,12 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         $mform->addElement('select', 'fileid', get_string('image', 'customcertelement_image'), self::get_images());
 
+	if($action == "add"){
+            \mod_customcert\element_helper::render_form_element_width_hint($mform);
+        }
         $mform->addElement('text', 'width', get_string('width', 'customcertelement_image'), array('size' => 10));
         $mform->setType('width', PARAM_INT);
         $mform->setDefault('width', 0);
@@ -137,7 +140,7 @@ class element extends \mod_customcert\element {
      * @param \stdClass $data the form data
      * @return bool true of success, false otherwise.
      */
-    public function save_form_elements($data, $count) {
+    public function save_form_elements($data, $count = 1) {
         global $COURSE, $SITE;
 
         // Set the context.

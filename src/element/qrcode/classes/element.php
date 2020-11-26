@@ -47,8 +47,8 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
-        \mod_customcert\element_helper::render_form_element_width($mform);
+    public function render_form_elements($mform, $action) {
+        \mod_customcert\element_helper::render_form_element_width($mform, $action);
 
         $mform->addElement('text', 'height', get_string('height', 'customcertelement_qrcode'), array('size' => 10));
         $mform->setType('height', PARAM_INT);

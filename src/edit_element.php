@@ -78,7 +78,7 @@ $PAGE->navbar->add(get_string('editcustomcert', 'customcert'), new moodle_url('/
     array('tid' => $tid)));
 $PAGE->navbar->add(get_string('editelement', 'customcert'));
 
-$mform = new \mod_customcert\edit_element_form($pageurl, array('element' => $element));
+$mform = new \mod_customcert\edit_element_form($pageurl, array('element' => $element, 'action' => $action));
 
 // Check if they cancelled.
 if ($mform->is_cancelled()) {

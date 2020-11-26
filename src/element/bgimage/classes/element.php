@@ -40,7 +40,7 @@ class element extends \customcertelement_image\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         $mform->addElement('select', 'fileid', get_string('image', 'customcertelement_image'), self::get_images());
         $mform->addElement('filemanager', 'customcertimage', get_string('uploadimage', 'customcert'), '',
             $this->filemanageroptions);

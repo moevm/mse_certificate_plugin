@@ -237,14 +237,14 @@ abstract class element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance.
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         // Render the common elements.
         element_helper::render_form_element_font($mform);
         element_helper::render_form_element_colour($mform);
         if ($this->showposxy) {
             element_helper::render_form_element_position($mform);
         }
-        element_helper::render_form_element_width($mform);
+        element_helper::render_form_element_width($mform, $action);
         element_helper::render_form_element_refpoint($mform);
     }
 
@@ -304,7 +304,7 @@ abstract class element {
      * @param \stdClass $data the form data
      * @return bool true of success, false otherwise.
      */
-    public function save_form_elements($data, $count) {
+    public function save_form_elements($data, $count = 1) {
         global $DB;
 
         // Get the data from the form.

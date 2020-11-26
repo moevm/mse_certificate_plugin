@@ -41,7 +41,7 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         // Get the user profile fields.
         $coursefields = array(
             'fullname' => get_string('fullnamecourse'),
@@ -66,7 +66,7 @@ class element extends \mod_customcert\element {
         $mform->setType('coursefield', PARAM_ALPHANUM);
         $mform->addHelpButton('coursefield', 'coursefield', 'customcertelement_coursefield');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
     }
 
     /**

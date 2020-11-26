@@ -45,7 +45,7 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         global $COURSE;
 
         // Get the grade items we can display.
@@ -63,7 +63,7 @@ class element extends \mod_customcert\element {
         $mform->setType('gradeformat', PARAM_INT);
         $mform->addHelpButton('gradeformat', 'gradeformat', 'customcertelement_grade');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
     }
 
     /**

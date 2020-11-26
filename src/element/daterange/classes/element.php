@@ -109,7 +109,7 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         global $COURSE;
 
         // Get the possible date options.
@@ -126,7 +126,7 @@ class element extends \mod_customcert\element {
         $mform->addElement('select', 'dateitem', get_string('dateitem', 'customcertelement_daterange'), $dateoptions);
         $mform->addHelpButton('dateitem', 'dateitem', 'customcertelement_daterange');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
 
         $mform->addElement('header', 'dateranges', get_string('dateranges', 'customcertelement_daterange'));
         $mform->addElement('static', 'help', '', get_string('help', 'customcertelement_daterange'));

@@ -72,7 +72,7 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         global $CFG, $COURSE;
 
         // Get the possible date options.
@@ -94,7 +94,7 @@ class element extends \mod_customcert\element {
         $mform->addElement('select', 'dateformat', get_string('dateformat', 'customcertelement_date'), self::get_date_formats());
         $mform->addHelpButton('dateformat', 'dateformat', 'customcertelement_date');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
     }
 
     /**
