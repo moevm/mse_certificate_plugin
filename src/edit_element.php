@@ -26,7 +26,6 @@ require_once('../../config.php');
 
 $tid = required_param('tid', PARAM_INT);
 $action = required_param('action', PARAM_ALPHA);
-
 $template = $DB->get_record('customcert_templates', array('id' => $tid), '*', MUST_EXIST);
 
 // Set the template object.

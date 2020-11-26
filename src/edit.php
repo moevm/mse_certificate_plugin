@@ -219,7 +219,7 @@ if ($data = $mform->get_data()) {
             $element = $data->$element;
 	    // Get count added elements
             $count = "countelements_" . $pageid;
-            $count = $data->$count;
+	    $count = $data->$count;
 
             // Create the URL to redirect to to add this element.
             $params = array();
