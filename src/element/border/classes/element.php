@@ -40,7 +40,7 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         // We want to define the width of the border.
         $mform->addElement('text', 'width', get_string('width', 'customcertelement_border'), array('size' => 10));
         $mform->setType('width', PARAM_INT);

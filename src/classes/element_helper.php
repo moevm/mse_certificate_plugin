@@ -181,11 +181,23 @@ class element_helper {
      *
      * @param \MoodleQuickForm $mform the edit_form instance.
      */
-    public static function render_form_element_width($mform) {
+    public static function render_form_element_width($mform, $action) {  
+        if($action == "add"){
+            element_helper::render_form_element_width_hint($mform);
+        }
         $mform->addElement('text', 'width', get_string('elementwidth', 'customcert'), array('size' => 10));
         $mform->setType('width', PARAM_INT);
         $mform->setDefault('width', 0);
         $mform->addHelpButton('width', 'elementwidth', 'customcert');
+    }
+
+/**
+     * Helper function to render hint about width element.
+     *
+     * @param \MoodleQuickForm $mform the edit_form instance.
+     */
+    public static function render_form_element_width_hint($mform) {
+        $mform->addElement('html', '<div style="position: relative; top: 40px; left: 130px; margin-top: -45px; width: 160px; color: #ada3a3; font-size: 8pt;"><i>Чтобы элементы выравнивались, необходимо задать ширину</i></div>');     
     }
 
     /**
