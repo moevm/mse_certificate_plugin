@@ -302,9 +302,12 @@ abstract class element {
      * Can be overridden if more functionality is needed.
      *
      * @param \stdClass $data the form data
+     * @param int $count count added elements
+     * @param int $needalign indicates whether elements should be aligned
+     * @param string $aligntype shows how to align elements
      * @return bool true of success, false otherwise.
      */
-    public function save_form_elements($data, $count = 1) {
+    public function save_form_elements($data, $count = 1, $needalign = 0, $aligntype = "left") {
         global $DB;
 
         // Get the data from the form.
@@ -330,14 +333,18 @@ abstract class element {
             $element->element = $data->element;
             $element->pageid = $data->pageid;
             $element->timecreated = time();
+            if($needalign == 1 && $element->width != 0)
+            	$element->posx = \mod_customcert\element_helper::get_start_x_aligned_elements($element->posx, $element->width, $count, $aligntype);
             for($i=0;$i<$count;$i++){
-            	$element->sequence = \mod_customcert\element_helper::get_element_sequence($element->pageid);
-		$DB->insert_record('customcert_elements', $element, false);
-		$element->posx += $element->width;
-            }
+    	    	$element->sequence = \mod_customcert\element_helper::get_element_sequence($element->pageid);
+    	    	$DB->insert_record('customcert_elements', $element, false);
+    	    	if($needalign == 1)
+    	    	    $element->posx += $element->width;
+    	    }
             return true;
         }
     }
+    
 
     /**
      * This will handle how form data will be saved into the data column in the

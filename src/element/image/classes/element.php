@@ -140,7 +140,7 @@ class element extends \mod_customcert\element {
      * @param \stdClass $data the form data
      * @return bool true of success, false otherwise.
      */
-    public function save_form_elements($data, $count = 1) {
+    public function save_form_elements($data, $count, $needalign, $aligntype) {
         global $COURSE, $SITE;
 
         // Set the context.
@@ -153,7 +153,7 @@ class element extends \mod_customcert\element {
         // Handle file uploads.
         \mod_customcert\certificate::upload_files($data->customcertimage, $context->id);
 
-        return parent::save_form_elements($data, $count);
+        return parent::save_form_elements($data, $count, $needalign, $aligntype);
     }
 
     /**

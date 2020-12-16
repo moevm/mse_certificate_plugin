@@ -55,15 +55,19 @@ if ($action == 'edit') {
     $id = required_param('id', PARAM_INT);
     $element = $DB->get_record('customcert_elements', array('id' => $id), '*', MUST_EXIST);
     $count = 1;
-    $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('id' => $id, 'tid' => $tid, 'action' => $action, 'count' => $count));
+    $needalign = 0;
+    $aligntype = "left";
+    $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('id' => $id, 'tid' => $tid, 'action' => $action, 'count' => $count, 'needalign' => $needalign, 'aligntype' => $aligntype));
 } else { // Must be adding an element.
     // We need to supply what element we want added to what page.
     $pageid = required_param('pageid', PARAM_INT);
     $element = new stdClass();
     $element->element = required_param('element', PARAM_ALPHA);
     $count = required_param('count', PARAM_INT);
+    $needalign = required_param('needalign', PARAM_INT);
+    $aligntype = required_param('aligntype', PARAM_ALPHA);
     $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('tid' => $tid, 'element' => $element->element,
-        'pageid' => $pageid, 'action' => $action, 'count' => $count));
+        'pageid' => $pageid, 'action' => $action, 'count' => $count, 'needalign' => $needalign, 'aligntype' => $aligntype));
 }
 
 // Set up the page.
@@ -95,9 +99,13 @@ if ($data = $mform->get_data()) {
     }
     // Set the element variable.
     $data->element = $element->element;
+    // Сreate an alignment object
+    //$align = new stdClass();
+    //$align->need = $needalign;SS
+    //$align->type = $aligntype;
     // Get an instance of the element class.
     if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        $e->save_form_elements($data, $count);
+        $e->save_form_elements($data, $count, $needalign, $aligntype);
     }
     
     $url = new moodle_url('/mod/customcert/edit.php', array('tid' => $tid));
