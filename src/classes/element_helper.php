@@ -648,4 +648,27 @@ class element_helper {
             $grade->get_dategraded()
         );
     }
+    
+    /**
+     * Return start posx when aligning elements.
+     *
+     * @param int $posx start posx without regard to alignment
+     * @param int $width width added elements
+     * @param int $count count added elements
+     * @param string $aligntype shows how to align elements
+     * @return int start posx taking into account the alignment.
+     */
+    public static function get_start_x_aligned_elements($posx, $width, $count, $aligntype) {
+    	if($aligntype == "right"){
+            $widthallelements = $count * $width;
+            $posx -= $widthallelements;
+        } else if($aligntype == "center"){
+            $widthallelements = $count * $width;
+            $halfwidthallelements = intdiv($widthallelements , 2);
+            $posx -= $halfwidthallelements;
+        }
+        if($posx < 0)
+        	$posx = 0;
+        return $posx;
+    }
 }

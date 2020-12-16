@@ -220,7 +220,13 @@ if ($data = $mform->get_data()) {
 	    // Get count added elements
             $count = "countelements_" . $pageid;
             $count = $data->$count;
-
+            // Get align
+            $needalign = "needalign_" . $pageid;
+            $needalign = $data->$needalign;
+            // Get the alignment type
+            $aligntype = "aligntype_" . $pageid;
+            $aligntype = $data->$aligntype;
+	
             // Create the URL to redirect to to add this element.
             $params = array();
             $params['tid'] = $template->get_id();
@@ -228,6 +234,8 @@ if ($data = $mform->get_data()) {
             $params['element'] = $element;
             $params['pageid'] = $pageid;
             $params['count'] = $count;
+            $params['needalign'] = $needalign;
+            $params['aligntype'] = $aligntype;
             $url = new moodle_url('/mod/customcert/edit_element.php', $params);
             redirect($url);
         }
