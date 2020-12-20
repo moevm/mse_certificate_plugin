@@ -54,14 +54,20 @@ if ($action == 'edit') {
     // The id of the element must be supplied if we are currently editing one.
     $id = required_param('id', PARAM_INT);
     $element = $DB->get_record('customcert_elements', array('id' => $id), '*', MUST_EXIST);
-    $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('id' => $id, 'tid' => $tid, 'action' => $action));
+    $count = 1;
+    $needalign = 0;
+    $aligntype = "left";
+    $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('id' => $id, 'tid' => $tid, 'action' => $action, 'count' => $count, 'needalign' => $needalign, 'aligntype' => $aligntype));
 } else { // Must be adding an element.
     // We need to supply what element we want added to what page.
     $pageid = required_param('pageid', PARAM_INT);
     $element = new stdClass();
     $element->element = required_param('element', PARAM_ALPHA);
+    $count = required_param('count', PARAM_INT);
+    $needalign = required_param('needalign', PARAM_INT);
+    $aligntype = required_param('aligntype', PARAM_ALPHA);
     $pageurl = new moodle_url('/mod/customcert/edit_element.php', array('tid' => $tid, 'element' => $element->element,
-        'pageid' => $pageid, 'action' => $action));
+        'pageid' => $pageid, 'action' => $action, 'count' => $count, 'needalign' => $needalign, 'aligntype' => $aligntype));
 }
 
 // Set up the page.
@@ -76,7 +82,7 @@ $PAGE->navbar->add(get_string('editcustomcert', 'customcert'), new moodle_url('/
     array('tid' => $tid)));
 $PAGE->navbar->add(get_string('editelement', 'customcert'));
 
-$mform = new \mod_customcert\edit_element_form($pageurl, array('element' => $element));
+$mform = new \mod_customcert\edit_element_form($pageurl, array('element' => $element, 'action' => $action));
 
 // Check if they cancelled.
 if ($mform->is_cancelled()) {
@@ -93,11 +99,15 @@ if ($data = $mform->get_data()) {
     }
     // Set the element variable.
     $data->element = $element->element;
+    // Сreate an alignment object
+    //$align = new stdClass();
+    //$align->need = $needalign;SS
+    //$align->type = $aligntype;
     // Get an instance of the element class.
     if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        $e->save_form_elements($data);
+        $e->save_form_elements($data, $count, $needalign, $aligntype);
     }
-
+    
     $url = new moodle_url('/mod/customcert/edit.php', array('tid' => $tid));
     redirect($url);
 }

@@ -40,14 +40,14 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         global $COURSE;
 
         $mform->addElement('select', 'gradeitem', get_string('gradeitem', 'customcertelement_gradeitemname'),
             \mod_customcert\element_helper::get_grade_items($COURSE));
         $mform->addHelpButton('gradeitem', 'gradeitem', 'customcertelement_gradeitemname');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
     }
 
     /**

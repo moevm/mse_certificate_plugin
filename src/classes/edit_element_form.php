@@ -54,7 +54,8 @@ class edit_element_form extends \moodleform {
 
         $mform->updateAttributes(array('id' => 'editelementform'));
 
-        $element = $this->_customdata['element'];
+        $element = $this->_customdata['element'];    
+        $action = $this->_customdata['action'];
 
         // Add the field for the name of the element, this is required for all elements.
         $mform->addElement('text', 'name', get_string('elementname', 'customcert'), 'maxlength="255"');
@@ -65,7 +66,7 @@ class edit_element_form extends \moodleform {
 
         $this->element = \mod_customcert\element_factory::get_element_instance($element);
         $this->element->set_edit_element_form($this);
-        $this->element->render_form_elements($mform);
+        $this->element->render_form_elements($mform, $action);
 
         $this->add_action_buttons(true);
     }

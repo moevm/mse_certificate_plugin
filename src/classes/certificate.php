@@ -158,6 +158,22 @@ class certificate {
         return $sizes;
     }
 
+
+    /**
+     * Return the list of possible counts added elements.
+     */
+    public static function get_count_added_elements() {
+        // Array to store the sizes.
+        $counts = array();
+
+        for ($i = 1; $i <= 10; $i++) {
+            $counts[$i] = $i;
+        }
+
+        return $counts;
+    }
+
+
     /**
      * Get the time the user has spent in the course.
      *

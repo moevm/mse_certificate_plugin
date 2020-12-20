@@ -295,13 +295,19 @@ class edit_form extends \moodleform {
                 . \html_writer::tag( 'div', $link));
             $mform->addHelpButton('elements_' . $page->id, 'elements', 'customcert');
         }
-
+        
         $group = array();
         $group[] = $mform->createElement('select', 'element_' . $page->id, '', element_helper::get_available_element_types());
+        $group[] = $mform->createElement('select', 'countelements_' . $page->id, '', certificate::get_count_added_elements());
         $group[] = $mform->createElement('submit', 'addelement_' . $page->id, get_string('addelement', 'customcert'),
             array(), false);
         $mform->addElement('group', 'elementgroup', '', $group, '', false);
-
+        
+        $group = array();
+        $group[] = $mform->createElement('advcheckbox', 'needalign_' . $page->id, 'Включить выравнивание', '', '', array(0, 1));
+        $group[] = $mform->createElement('select', 'aligntype_' . $page->id, '', array("left" => "По левому краю", "right" => "По правому краю", "center" => "По центру"));
+	$mform->addElement('group', 'aligngroup', '', $group, '', false);
+	
         // Add option to delete this page if there is more than one page.
         if ($this->numpages > 1) {
             // Link to delete the page.

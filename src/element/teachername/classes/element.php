@@ -40,12 +40,12 @@ class element extends \mod_customcert\element {
      *
      * @param \MoodleQuickForm $mform the edit_form instance
      */
-    public function render_form_elements($mform) {
+    public function render_form_elements($mform, $action) {
         $mform->addElement('select', 'teacher', get_string('teacher', 'customcertelement_teachername'),
             $this->get_list_of_teachers());
         $mform->addHelpButton('teacher', 'teacher', 'customcertelement_teachername');
 
-        parent::render_form_elements($mform);
+        parent::render_form_elements($mform, $action);
     }
 
     /**
