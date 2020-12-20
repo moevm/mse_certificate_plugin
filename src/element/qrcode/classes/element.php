@@ -132,7 +132,7 @@ class element extends \mod_customcert\element {
      * @param \stdClass $user the user we are rendering this for
      */
     public function render($pdf, $preview, $user) {
-        global $DB;
+        global $DB, $COURSE;
 
         // If there is no element data, we have nothing to display.
         if (empty($this->get_data())) {
@@ -174,6 +174,15 @@ class element extends \mod_customcert\element {
             $qrcodeurl = $qrcodeurl->out(false);
         }
 
+		if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                $qrcodeurl = "https://";
+        else
+                $qrcodeurl = "http://";
+        //Append the host(domain name, ip) to the URL.
+        $qrcodeurl.= $_SERVER['HTTP_HOST'];
+        $qrcodeurl.= "/course/view.php?id=";
+        $qrcodeurl.= strval($COURSE->id);
+		
         $barcode = new \TCPDF2DBarcode($qrcodeurl, self::BARCODETYPE);
         $image = $barcode->getBarcodePngData($imageinfo->width, $imageinfo->height);
 
@@ -192,6 +201,7 @@ class element extends \mod_customcert\element {
      * @return string the html
      */
     public function render_html() {
+		global $COURSE;
         // If there is no element data, we have nothing to display.
         if (empty($this->get_data())) {
             return;
@@ -199,8 +209,14 @@ class element extends \mod_customcert\element {
 
         $imageinfo = json_decode($this->get_data());
 
-        $qrcodeurl = new \moodle_url('/');
-        $qrcodeurl = $qrcodeurl->out(false);
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                $qrcodeurl = "https://";
+        else
+                $qrcodeurl = "http://";
+        //Append the host(domain name, ip) to the URL.
+        $qrcodeurl.= $_SERVER['HTTP_HOST'];
+        $qrcodeurl.= "/course/view.php?id=";
+        $qrcodeurl.= strval($COURSE->id);
 
         $barcode = new \TCPDF2DBarcode($qrcodeurl, self::BARCODETYPE);
         return $barcode->getBarcodeHTML($imageinfo->width / 10, $imageinfo->height / 10);
