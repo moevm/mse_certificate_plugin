@@ -176,6 +176,31 @@ if ($data = $mform->get_data()) {
         // Create a page for this template.
         $pageid = $template->add_page();
 
+		//Add qr-code with the link to the course to the new page
+        $element = new \stdClass();
+        $element->name = 'course_link';
+        $arrtostore = [
+            'width' => 10,
+            'height' => 10
+        ];
+
+        $element->data = json_encode($arrtostore);
+        $element->font = null;
+        $element->fontsize = null;
+        $element->color = null;
+        $element->posx = 10;
+        $element->posy = 10;
+        $element->width = 10;
+        $element->refpoint = 10;
+
+        $element->element = 'qrcode';
+        $element->pageid = $pageid;
+        $element->timecreated = time();
+        $element->sequence = \mod_customcert\element_helper::get_element_sequence($element->pageid);
+        $DB->insert_record('customcert_elements', $element, false);
+
+		
+		
         // Associate all the data from the form to the newly created page.
         $width = 'pagewidth_' . $pageid;
         $height = 'pageheight_' . $pageid;
