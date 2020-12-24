@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * File contains the unit tests for the element helper class.
+ * File contains the unit tests for the element class.
  *
  * @package    mod_customcert
  * @category   test
@@ -26,15 +26,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 global $CFG;
-
-/**
- * Unit tests for the element helper class.
- *
- * @package    mod_customcert
- * @category   test
- * @copyright  2017 Mark Nelson <markn@moodle.com>
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
  
  class mod_customcert_element_testcase extends advanced_testcase {
 
