@@ -99,10 +99,6 @@ if ($data = $mform->get_data()) {
     }
     // Set the element variable.
     $data->element = $element->element;
-    // Сreate an alignment object
-    //$align = new stdClass();
-    //$align->need = $needalign;SS
-    //$align->type = $aligntype;
     // Get an instance of the element class.
     if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
         $e->save_form_elements($data, $count, $needalign, $aligntype);
