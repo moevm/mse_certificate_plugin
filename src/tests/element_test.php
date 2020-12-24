@@ -53,22 +53,22 @@ global $CFG;
         $template = new \mod_customcert\template($template);
 
         // Add a page to the template.
-        $pageid = $template->add_page();
+		$pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 10;
-		$data->text = "Test text";
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 10;
+        $data->text = "Test text";
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data);
+        }
 	
-		$element = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element = $DB->get_record('customcert_elements', ['sequence' => '1']);
 
-		$this->assertEquals("test", $element->name);
+        $this->assertEquals("test", $element->name);
     }
 
 	 /**
@@ -90,24 +90,24 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 10;
-		$data->text = "Text";
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 10;
+        $data->text = "Text";
 
-		$count = 2;
+        $count = 2;
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
     }
     
     /**
@@ -129,27 +129,27 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 10;
-		$data->text = "Text";
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 10;
+        $data->text = "Text";
 		
-		$needalign = 1;
-		$count = 2;
+        $needalign = 1;
+        $count = 2;
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals(0, $element1->posx);
-		$this->assertEquals(10, $element2->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals(0, $element1->posx);
+        $this->assertEquals(10, $element2->posx);
     }
     
     /**
@@ -171,30 +171,30 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 20;
-		$data->text = "Text";
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 20;
+        $data->text = "Text";
 		
-		$needalign = 1;
-		$count = 3;
+        $needalign = 1;
+        $count = 3;
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign); //, $count, $needalign, $aligntype);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign); //, $count, $needalign, $aligntype);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
-		$element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals("test", $element3->name);
-		$this->assertEquals(0, $element1->posx);
-		$this->assertEquals(20, $element2->posx);
-		$this->assertEquals(40, $element3->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals("test", $element3->name);
+        $this->assertEquals(0, $element1->posx);
+        $this->assertEquals(20, $element2->posx);
+        $this->assertEquals(40, $element3->posx);
     }
     
     /**
@@ -216,27 +216,27 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 10;
-		$data->text = "Text";
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 10;
+        $data->text = "Text";
 		
-		$needalign = 0;
-		$count = 2;
+        $needalign = 0;
+        $count = 2;
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals(0, $element1->posx);
-		$this->assertEquals(0, $element2->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals(0, $element1->posx);
+        $this->assertEquals(0, $element2->posx);
     }
     
     /**
@@ -258,30 +258,30 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 20;
-		$data->text = "Text";
-		$data->posx = 40;
-		$data->posy = 40;
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 20;
+        $data->text = "Text";
+        $data->posx = 40;
+        $data->posy = 40;
 		
-		$needalign = 1;
-		$count = 2;
-		$aligntype = "center";
+        $needalign = 1;
+        $count = 2;
+        $aligntype = "center";
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign, $aligntype);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign, $aligntype);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals(20, $element1->posx);
-		$this->assertEquals(40, $element2->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals(20, $element1->posx);
+        $this->assertEquals(40, $element2->posx);
     }
     
     /**
@@ -303,30 +303,30 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 20;
-		$data->text = "Text";
-		$data->posx = 40;
-		$data->posy = 40;
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 20;
+        $data->text = "Text";
+        $data->posx = 40;
+        $data->posy = 40;
 		
-		$needalign = 1;
-		$count = 2;
-		$aligntype = "right";
+        $needalign = 1;
+        $count = 2;
+        $aligntype = "right";
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign, $aligntype);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign, $aligntype);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals(0, $element1->posx);
-		$this->assertEquals(20, $element2->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals(0, $element1->posx);
+        $this->assertEquals(20, $element2->posx);
     }
     
     /**
@@ -348,33 +348,33 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 30;
-		$data->text = "Text";
-		$data->posx = 40;
-		$data->posy = 40;
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 30;
+        $data->text = "Text";
+        $data->posx = 40;
+        $data->posy = 40;
 		
-		$needalign = 1;
-		$count = 3;
-		$aligntype = "right";
+        $needalign = 1;
+        $count = 3;
+        $aligntype = "right";
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign, $aligntype);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign, $aligntype);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
-		$element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals("test", $element3->name);
-		$this->assertEquals(0, $element1->posx);
-		$this->assertEquals(30, $element2->posx);
-		$this->assertEquals(60, $element3->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals("test", $element3->name);
+        $this->assertEquals(0, $element1->posx);
+        $this->assertEquals(30, $element2->posx);
+        $this->assertEquals(60, $element3->posx);
     }
     
     /**
@@ -396,35 +396,32 @@ global $CFG;
         // Add a page to the template.
         $pageid = $template->add_page();
 
-		$data = new \stdClass();
-		$data->name = "test";
-		$data->pageid = $pageid;
-		$data->element = "text";
-		$data->width = 30;
-		$data->text = "Text";
-		$data->posx = 30;
-		$data->posy = 30;
+        $data = new \stdClass();
+        $data->name = "test";
+        $data->pageid = $pageid;
+        $data->element = "text";
+        $data->width = 30;
+        $data->text = "Text";
+        $data->posx = 30;
+        $data->posy = 30;
 		
-		$needalign = 1;
-		$count = 3;
-		$aligntype = "center";
+        $needalign = 1;
+        $count = 3;
+        $aligntype = "center";
 
-		if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
-        	$e->save_form_elements($data, $count, $needalign, $aligntype);
-    	}
+        if ($e = \mod_customcert\element_factory::get_element_instance($data)) {
+            $e->save_form_elements($data, $count, $needalign, $aligntype);
+        }
 	
-		$element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-		$element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
-		$element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
 
-		$this->assertEquals("test", $element1->name);
-		$this->assertEquals("test", $element2->name);
-		$this->assertEquals("test", $element3->name);
-		$this->assertEquals(0, $element1->posx);
-		$this->assertEquals(30, $element2->posx);
-		$this->assertEquals(60, $element3->posx);
+        $this->assertEquals("test", $element1->name);
+        $this->assertEquals("test", $element2->name);
+        $this->assertEquals("test", $element3->name);
+        $this->assertEquals(0, $element1->posx);
+        $this->assertEquals(30, $element2->posx);
+        $this->assertEquals(60, $element3->posx);
     }
-    
-    
-
 }
