@@ -317,10 +317,8 @@ abstract class element {
         $element->font = (isset($data->font)) ? $data->font : null;
         $element->fontsize = (isset($data->fontsize)) ? $data->fontsize : null;
         $element->colour = (isset($data->colour)) ? $data->colour : null;
-        if ($this->showposxy) {
-            $element->posx = (isset($data->posx)) ? $data->posx : null;
-            $element->posy = (isset($data->posy)) ? $data->posy : null;
-        }
+        $element->posx = (isset($data->posx)) ? $data->posx : null;
+        $element->posy = (isset($data->posy)) ? $data->posy : null;
         $element->width = (isset($data->width)) ? $data->width : null;
         $element->refpoint = (isset($data->refpoint)) ? $data->refpoint : null;
         $element->timemodified = time();
