@@ -424,7 +424,4 @@ global $CFG;
 		$this->assertEquals(30, $element2->posx);
 		$this->assertEquals(60, $element3->posx);
     }
-    
-    
-
 }
