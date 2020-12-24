@@ -66,7 +66,7 @@ global $CFG;
             $e->save_form_elements($data);
         }
 	
-        $element = $DB->get_record('customcert_elements', ['sequence' => '1']);
+        $element = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element->name);
     }
@@ -103,8 +103,8 @@ global $CFG;
             $e->save_form_elements($data, $count);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -143,8 +143,8 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -185,9 +185,9 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign); //, $count, $needalign, $aligntype);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
-        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
+        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -230,8 +230,8 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -275,8 +275,8 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign, $aligntype);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -320,8 +320,8 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign, $aligntype);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -365,9 +365,9 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign, $aligntype);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
-        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
+        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
@@ -413,9 +413,9 @@ global $CFG;
             $e->save_form_elements($data, $count, $needalign, $aligntype);
         }
 	
-        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1']);
-        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2']);
-        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3']);
+        $element1 = $DB->get_record('customcert_elements', ['sequence' => '1', 'pageid' => $data->pageid]);
+        $element2 = $DB->get_record('customcert_elements', ['sequence' => '2', 'pageid' => $data->pageid]);
+        $element3 = $DB->get_record('customcert_elements', ['sequence' => '3', 'pageid' => $data->pageid]);
 
         $this->assertEquals("test", $element1->name);
         $this->assertEquals("test", $element2->name);
