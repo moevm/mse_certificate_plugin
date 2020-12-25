@@ -140,7 +140,7 @@ class element extends \mod_customcert\element {
      * @param \stdClass $data the form data
      * @return bool true of success, false otherwise.
      */
-    public function save_form_elements($data, $count, $needalign, $aligntype) {
+    public function save_form_elements($data, $count = 1, $needalign = 0, $aligntype = "left") {
         global $COURSE, $SITE;
 
         // Set the context.
