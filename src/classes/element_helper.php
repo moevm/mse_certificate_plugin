@@ -22,6 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+
 namespace mod_customcert;
 
 defined('MOODLE_INTERNAL') || die();
@@ -29,7 +30,7 @@ defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/grade/constants.php');
 require_once($CFG->dirroot . '/grade/lib.php');
 require_once($CFG->dirroot . '/grade/querylib.php');
-
+mb_internal_encoding("UTF-8");
 /**
  * Class helper.
  *
@@ -67,7 +68,10 @@ class element_helper {
         list($font, $attr) = self::get_font($element);
         $pdf->setFont($font, $attr, $element->get_fontsize());
         $fontcolour = \TCPDF_COLORS::convertHTMLColorToDec($element->get_colour(), $fontcolour);
+        
         $pdf->SetTextColor($fontcolour['R'], $fontcolour['G'], $fontcolour['B']);
+        
+       
 
         $x = $element->get_posx();
         $y = $element->get_posy();
@@ -137,15 +141,22 @@ class element_helper {
      * @param \MoodleQuickForm $mform the edit_form instance.
      */
     public static function render_form_element_font($mform) {
+           
+        
+        element_helper::render_form_element_font_hint($mform, $select1);
         $mform->addElement('select', 'font', get_string('font', 'customcert'), \mod_customcert\certificate::get_fonts());
         $mform->setType('font', PARAM_TEXT);
         $mform->setDefault('font', 'times');
         $mform->addHelpButton('font', 'font', 'customcert');
+        
         $mform->addElement('select', 'fontsize', get_string('fontsize', 'customcert'),
             \mod_customcert\certificate::get_font_sizes());
         $mform->setType('fontsize', PARAM_INT);
         $mform->setDefault('fontsize', 12);
         $mform->addHelpButton('fontsize', 'fontsize', 'customcert');
+    }
+    public static function render_form_element_font_hint($mform, $font) {
+            $mform->addElement('html', '<div style="position: relative; top: 40px; left: 130px; margin-top: -45px; width: 160px; color: #FF0000; font-size: 8pt;"><i>This font doesnt support Cyrillic characters</i></div>');
     }
 
     /**
@@ -199,7 +210,8 @@ class element_helper {
     public static function render_form_element_width_hint($mform) {
         $mform->addElement('html', '<div style="position: relative; top: 40px; left: 130px; margin-top: -45px; width: 160px; color: #ada3a3; font-size: 8pt;"><i>Чтобы элементы выравнивались, необходимо задать ширину</i></div>');     
     }
-
+    
+    
     /**
      * Helper function to render the refpoint element.
      *
@@ -647,28 +659,5 @@ class element_helper {
             grade_format_gradevalue($grade->finalgrade, $gradeitem, true, $gradeformat),
             $grade->get_dategraded()
         );
-    }
-    
-    /**
-     * Return start posx when aligning elements.
-     *
-     * @param int $posx start posx without regard to alignment
-     * @param int $width width added elements
-     * @param int $count count added elements
-     * @param string $aligntype shows how to align elements
-     * @return int start posx taking into account the alignment.
-     */
-    public static function get_start_x_aligned_elements($posx, $width, $count, $aligntype) {
-    	if($aligntype == "right"){
-            $widthallelements = $count * $width;
-            $posx -= $widthallelements;
-        } else if($aligntype == "center"){
-            $widthallelements = $count * $width;
-            $halfwidthallelements = intdiv($widthallelements , 2);
-            $posx -= $halfwidthallelements;
-        }
-        if($posx < 0)
-        	$posx = 0;
-        return $posx;
     }
 }

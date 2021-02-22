@@ -50,6 +50,8 @@ class edit_element_form extends \moodleform {
      * Form definition.
      */
     public function definition() {
+        global $PAGE;
+        $PAGE->requires->js_call_amd('mod_customcert/togglesupport', 'init');
         $mform =& $this->_form;
 
         $mform->updateAttributes(array('id' => 'editelementform'));
